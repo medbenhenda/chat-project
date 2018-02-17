@@ -27,6 +27,7 @@ Chat application bases on symfony components
 
 execute `php vendor/doctrine/orm/bin/doctrine orm:schema-tool:update --force
 `
+
 6. Generate entities proxies
 
 execute `php vendor/doctrine/orm/bin/doctrine  orm:generate-proxies`
