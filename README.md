@@ -1,4 +1,4 @@
-# Tchat project
+# Chat project
 
 ### Description
 Chat application bases on symfony components
