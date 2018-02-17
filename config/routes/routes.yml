@@ -1,0 +1,60 @@
+home:
+    path: /
+    controller: Chat\CoreModule\Controller\HomeController
+    action: Home
+    requirements:
+        method: GET
+
+sign_up:
+    path: /register
+    controller: Chat\UserModule\Controller\RegisterController
+    action: SignUp
+
+sign_in:
+    path: /signin
+    controller: Chat\UserModule\Controller\SignInController
+    action: SignIn
+    requirements:
+        method: POST
+
+list_connected_users:
+    path: /users-connected
+    controller: Chat\CoreModule\Controller\ChatController
+    action: connectedUsers
+    requirements:
+        method: GET
+
+archived_messages:
+    path: /archived-messages
+    controller: Chat\CoreModule\Controller\ChatController
+    action: ArchivedMessages
+    requirements:
+        method: GET
+
+send_message:
+    path: /send-message
+    controller: Chat\CoreModule\Controller\ChatController
+    action: SendMessage
+    requirements:
+        method: POST
+
+chat_room:
+    path: /chat
+    controller: Chat\CoreModule\Controller\ChatController
+    action: ChatRoom
+    requirements:
+        method: GET
+
+unread_messages:
+    path: /unread-messages
+    controller: Chat\CoreModule\Controller\ChatController
+    action: UnreadMessage
+    requirements:
+        method: GET
+
+received-messages:
+    path: /received-messages/{id}
+    controller: Chat\CoreModule\Controller\ChatController
+    action: ReceivedMessage
+    requirements:
+        method: GET

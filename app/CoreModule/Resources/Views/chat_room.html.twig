@@ -1,0 +1,96 @@
+{% extends "layout.html.twig" %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-12 chat_bg">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Connected Users</h5>
+                    <div class="connected-users">
+                        <ul class="list-group">
+                            {% for item in connected %}
+                                {% if current_user.id !=  item.id %}
+                                <a href="#" id="itemuser-{{ item.id }}" class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <p class="mb-1">
+                                        {{ item.firstName ~ ' ' ~ item.lastName }}
+                                    </p>
+                                </a>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    <h5>Chat</h5> <small class="warning message_notif"></small>
+                    <div class="recieved-messages">
+                    </div>
+                    <div class="write-message">
+                        <form action="/send-message" id="send-message" method="post" role="form" class="form-inline">
+                            <input type="hidden" name="destination" id="destination-user">
+                            <div class="form-group">
+                                <label class="sr-only" for="write_message">New message</label>
+                                <div class="input-group">
+                                    <textarea name="message" class="form-control" id="write_message" placeholder="message"></textarea>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send</button>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="row">
+                        <h3>Archived Messages</h3>
+                        <ul class="list-group">
+                            {% for item in messages %}
+                                <a href="#" id="{{ item.id }}" class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <small>{{ item.createdAt | date('y-m-d h:i:s') }}</small>
+                                    </div>
+                                    <p class="mb-1">
+                                        {{ item.body }}
+                                    </p>
+                                    <small>{{ item.user.firstname ~ ' ' ~ item.user.lastname}}</small>
+                                </a>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="row">
+                       <div class="col-md-12">
+                           <h3>Unread Messages</h3>
+                           <div class="unread-messages">
+                               <ul class="list-group">
+                                   {% for item in unread_messages %}
+                                       <a href="#" id="{{ item.id }}" class="list-group-item list-group-item-action flex-column align-items-start">
+                                           <div class="d-flex w-100 justify-content-between">
+                                               <small>{{ item.createdAt | date('y-m-d h:i:s') }}</small>
+                                           </div>
+                                           <p class="mb-1">
+                                               {{ item.body }}
+                                           </p>
+                                           <small>{{ item.user.firstname ~ ' ' ~ item.user.lastname}}</small>
+                                       </a>
+                                   {% endfor %}
+                               </ul>
+                           </div>
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascript %}
+    {{ parent() }}
+    <script src="../../../assets/js/chat_room.js"></script>
+{% endblock %}

@@ -1,0 +1,33 @@
+{
+    "name": "benhenda/chat",
+    "description": "chat project",
+    "type": "project",
+    "require": {
+        "symfony/security": "3.4.*",
+        "symfony/routing": "3.4.*",
+        "symfony/http-foundation": "3.4.*",
+        "symfony/yaml": "3.4.x-dev",
+        "psr/container": "^1.0@dev",
+        "doctrine/orm": "2.5.x-dev",
+        "symfony/var-dumper": "3.4.x-dev",
+        "symfony/config": "3.4.x-dev",
+        "symfony/validator": "3.4.x-dev",
+        "symfony/console": "3.4.x-dev",
+        "symfony/templating": "3.4.x-dev",
+        "twig/twig": "1.x-dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Chat\\": "app",
+            "Routing\\": "routing",
+            "Kernel\\": "kernel"
+        }
+    },
+    "authors": [
+        {
+            "name": "Mohamed Ben Henda",
+            "email": "benhenda.med@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}

@@ -1,0 +1,13 @@
+<ul class="list-group">
+    {% for item in messages %}
+        <a href="#" id="{{ item.id }}" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+                <small>{{ item.createdAt | date('y-m-d h:i:s') }}</small>
+            </div>
+            <p class="mb-1">
+                {{ item.body }}
+            </p>
+            <small>{{ item.user.firstname ~ ' ' ~ item.user.lastname}}</small>
+        </a>
+    {% endfor %}
+</ul>
