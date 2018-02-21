@@ -13,6 +13,7 @@ namespace Kernel;
 use Symfony\Component\Config\FileLocator;
 use Routing\YamlRouteLoader;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
 use Symfony\Component\Routing\RequestContext;
@@ -27,10 +28,14 @@ class Kernel
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 *
 	 * @return \Symfony\Component\HttpFoundation\Response
+	 * @throws \RuntimeException
 	 * @throws \InvalidArgumentException
 	 */
 	public function handle( Request $request)
 	{
+		$session = new Session();
+		$session->start();
+		$request->setSession($session);
 		//@todo : Making the collection route in the cache to optimizing the app.
 		// Get all defined route in config/routes/routes.yml
 		$definedRoutes = $this->getDefinedRoutes();

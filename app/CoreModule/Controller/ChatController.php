@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class ChatController extends Controller
 {
@@ -33,6 +34,11 @@ class ChatController extends Controller
 
 	public function ChatRoom(Request $request)
 	{
+		$tokenSecurity = $request->getSession()->get('_security_main');
+		$token = unserialize($tokenSecurity);
+		if (!$token instanceof UsernamePasswordToken) {
+			return $this->redirect('/');
+		}
 		$user = $this->checkUser();
 		$serviceMessageManager = new ServiceMessageManager();
 		$serviceUserManager = new ServiceUserManager();

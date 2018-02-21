@@ -10,13 +10,20 @@
 namespace Chat\CoreModule\Controller;
 
 use Chat\Common\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class HomeController extends Controller
 {
-	public function Home($request)
+	public function Home(Request $request)
 	{
-		$content = $this->render($this->getTemplatesDirectory(), __METHOD__, array('name' => 'BenHenda'));
+		$tokenSecurity = $request->getSession()->get('_security_main');
+		$token = unserialize($tokenSecurity);
+		if ($token instanceof UsernamePasswordToken) {
+			return $this->redirect('/chat');
+		}
+		$content = $this->render($this->getTemplatesDirectory(), __METHOD__, array());
 		return new Response(
 			$content,
 			Response::HTTP_OK,

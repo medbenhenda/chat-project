@@ -105,15 +105,29 @@ class ServiceUserManager implements ServiceManagerInterface
 		$passwordValid = $this->encoder->isPasswordValid($user->getPassword(), $password, null);
 		if ($passwordValid) {
 			$token  = new UsernamePasswordToken($user, $password, 'main', ['simple_user']);
-			$session = new Session();
-			$session->start();
+			$session = $request->getSession();
 			$session->set('_security_main', serialize($token));
 			$session->getFlashBag()->add('notice', 'You are logged!');
+			$request->setSession($session);
 
 			return $token;
 		}
 
 		return false;
+	}
+
+	/**
+	 * @param \Chat\UserModule\Entity\User $user
+	 * @param boolean $connected
+	 *
+	 * @throws \Doctrine\ORM\OptimisticLockException
+	 * @throws \Doctrine\ORM\ORMInvalidArgumentException
+	 */
+	public function setConnected( User $user, $connected)
+	{
+		$user->setConnected($connected);
+		$this->em->merge($user);
+		$this->em->flush();
 	}
 
 	/**

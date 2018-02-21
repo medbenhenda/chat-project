@@ -58,3 +58,8 @@ received-messages:
     action: ReceivedMessage
     requirements:
         method: GET
+
+logout:
+    path: /logout
+    controller: Chat\UserModule\Controller\SignInController
+    action: Logout
